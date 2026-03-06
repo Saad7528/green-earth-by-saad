@@ -8,12 +8,17 @@ async function loadCategorios() {
 );
 const data = await res.json();
 data.categories.forEach(item => { 
-    console.log(item)
+    // console.log(item)
     const btn = document.createElement("button")
     btn.className = "btn btn-success w-full";
+    btn.textContent = item.category_name;
+
+    // console.log(item.category_name);
+    categorysContainer.appendChild(btn)
+
     
 });
-categorysContainer.innerHTML = 'aksdjfklasdjfs'
+// categorysContainer.innerHTML = 'aksdjfklasdjfs'
 }
 
 loadCategorios()
