@@ -3,6 +3,7 @@ const categorysContainer = document.getElementById("categorys-container")
 const treeContainer = document.getElementById('tree-container')
 const loadSpinner = document.getElementById('load-spinner')
 const allCategoryBtn = document.getElementById("all-Categorys-btn")
+const treeDetailsModal = document.getElementById("tree-details-modal")
 
 // Button data load function
 async function loadCategorios() {
@@ -93,7 +94,7 @@ function displayTrees (trees) {
          </figure>
         
          <div class="card-body">
-             <h2 class="card-title text-[#15803D]">${tree.name}</h2>
+             <h2 class="card-title text-[#15803D]" onclick="openTreeModal(${tree.id})">${tree.name}</h2>
              <p class="line-clamp-2">${tree.description}</p>
              <div class="badge badge-outline badge-success">${tree.category}</div>  
              <div class="card-actions  justify-between items-center">
@@ -104,6 +105,12 @@ function displayTrees (trees) {
 
     treeContainer.appendChild(card)
     })
+}
+
+
+function openTreeModal (treeId) {
+    console.log(treeId)
+    treeDetailsModal.showModal();
 }
 loadTree();
 
