@@ -2,6 +2,7 @@
 const categorysContainer = document.getElementById("categorys-container")
 const treeContainer = document.getElementById('tree-container')
 const loadSpinner = document.getElementById('load-spinner')
+const allCategoryBtn = document.getElementById("all-Categorys-btn")
 
 // Button data load function
 async function loadCategorios() {
@@ -25,19 +26,23 @@ data.categories.forEach(item => {
 async function selectCategory(id, btn) {
     loading(true)
     // button style part
-    const allTreeButton = document.querySelectorAll("#categorys-container button, #all-tree-btn");
+    const allTreeButton = document.querySelectorAll("#categorys-container button, #all-Categorys-btn");
     allTreeButton.forEach( (btns) => btns.classList.remove("btn-success"))
     btn.classList.add("btn-success")
 
     // id to fetch data and show
     const res = await fetch(`https://openapi.programming-hero.com/api/category/${id}`)
     const data = await res.json();
-    console.log(data.plants)    
+    console.log(data.plants)   
+    displayTrees(data.plants)
+    loading(false)     
 }
 // true false ar maddhome try korechilam
 function loading(receive) {
     if(receive === true){
         loadSpinner.classList.remove('hidden')
+        treeContainer.innerHTML = "";
+
     }else{
          loadSpinner.classList.add('hidden')
 
@@ -52,6 +57,18 @@ function loading(receive) {
 // function hideLoading(){
 //     loadSpinner.classList.add("hidden")
 // }
+
+allCategoryBtn.addEventListener("click", (event) => {
+    loading(true)
+
+    const allTreeButton = document.querySelectorAll("#categorys-container button, #all-Categorys-btn");
+    allTreeButton.forEach( (btns) => btns.classList.remove("btn-success"))
+    allCategoryBtn.classList.add("btn-success")
+
+    loadTree()
+    loading(false)     
+
+})
 
 async function loadTree () {
     loading(true)
