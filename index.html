@@ -73,33 +73,34 @@
         <dialog id="tree-details-modal" class="modal">
         <div class="modal-box">
             
-            <!-- Modal header eith close button -->
-             <div>
+            <!-- Modal header with close button -->
+            <div>
                 <h3 class="flex justify-between items-start mb-4">Tree Details</h3>
                 <button class="btn btn-sm btn-circle btn-ghost" onclick="document.getElementById('plantModal')">X</button>
-             </div>
+            </div>
 
-             <!-- Modal content -->
-             <div class="gap-6">
+                <!-- Modal content -->
+                <div class="gap-6">
+                    <!-- PLANT IMAGE -->
+                    <img id="modalImage" src="" alt="plant" class="w-full !h-[250px] object-cover rounded-lg mb-12">
+                
+                    <!-- Plant Details -->
+                    <div class="">
+                        <p class="text-smtext-gray-500 mb-2">
+                            <span class="font-bold">Category:</span>
+                            <span id="modalCategory" class="badge badge-primary"></span>
+                        </p>
 
+                        <p class="text-smtext-gray-600 mb-4">
+                            <span id="modalDescription"></span>
+                        </p>
 
+                        <div class="flex items-baseline gap-2 mb-6">
+                            <span class="text-3x1 font-bold text-green-600">$<span id="modalPrice">0</span>
+                        </div>
 
-            <!-- Plant Details -->
-            <div class="">
-                <p class="text-smtext-gray-500 mb-2">
-                    <span class="font-bold">Category:</span>
-                    <span id="modalCategory" class="badge badge-primary"></span>
-                </p>
-
-                <p class="text-smtext-gray-600 mb-4">
-                    <span id="modalDescription"></span>
-                </p>
-
-                <div class="flex items-baseline gap-2 mb-6">
-                    <span class="text-3x1 font-bold text-green-600">$<span id="modalPrice">0</span>
+                    </div>
                 </div>
-
-             </div>
 
             <div class="modal-action">
             <form method="dialog">
