@@ -11,6 +11,9 @@ const modalCategory = document.getElementById("modal-category")
 const modalDescription = document.getElementById("modal-description")
 const modalPrice = document.getElementById("modal-price")
 
+const cartContainer = document.getElementById("cart-container")
+let cart = [];
+
 
 // Button data load function
 async function loadCategorios() {
@@ -107,7 +110,7 @@ function displayTrees (trees) {
              <div class="badge badge-outline badge-success">${tree.category}</div>  
              <div class="card-actions  justify-between items-center">
                  <h2 class="text-2xl font-bold text-[#15803D]">${tree.price}TK</h2>
-             <button class="btn btn-success text-white">Buy Now</button>
+             <button class="btn btn-success text-white" onclick="addToCart(${tree.id}, '${tree.name}', ${tree.price})">Cart</button>
              </div>
          </div>`
 
@@ -133,6 +136,50 @@ async function openTreeModal (treeId) {
 
 
 }
+
+function addToCart(id, name, price) {
+    console.log(id, name, price)
+
+      const existingItem = cart.find((item) => item.id === id);
+     if(existingItem){
+        existingItem.quantity += 1;
+     }else{
+        
+         cart.push({
+             id,
+             name,
+             price,
+             quantity: 1,
+         })
+     }
+
+    updateCart()
+}
+
+function updateCart() {
+    cartContainer.innerHTML = "";
+    console.log(cart)
+  
+    cart.forEach(item => {
+
+        const cartItem = document.createElement("div")
+        cartItem.className = "card card-body shadow-sm";
+        cartItem.innerHTML = `<div class="flex justify-between items-center">
+                                <div>
+                                    <h2>${item.name}</h2>
+                                    <p>${item.price} x ${item.quantity}}</p>
+                                </div>
+                                <button class="btn btn-ghost" onclick="removeFromCart(${item.id})">X</button>
+                            </div>
+                            <p class="text-right font-semibold text-xl">${item.price * item.quantity} TK</p>`;
+    cartContainer.appendChild(cartItem)
+    })
+}
+
+function removeFromCart(id) {
+
+}
+
 loadTree();
 
 loadCategorios();
