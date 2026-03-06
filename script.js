@@ -5,6 +5,13 @@ const loadSpinner = document.getElementById('load-spinner')
 const allCategoryBtn = document.getElementById("all-Categorys-btn")
 const treeDetailsModal = document.getElementById("tree-details-modal")
 
+const modalImage = document.getElementById("modal-image")
+const modalTitle = document.getElementById("modal-title")
+const modalCategory = document.getElementById("modal-category")
+const modalDescription = document.getElementById("modal-description")
+const modalPrice = document.getElementById("modal-price")
+
+
 // Button data load function
 async function loadCategorios() {
     const res = await fetch(
@@ -89,12 +96,13 @@ function displayTrees (trees) {
              src="${tree.image}"
              alt="${tree.name}"
              title="${tree.name}"
-             class="h-48 w-full object-cover"
+             class="h-48 w-full object-cover hover:cursor-pointer"
+             onclick="openTreeModal(${tree.id})"
              />
          </figure>
         
          <div class="card-body">
-             <h2 class="card-title text-[#15803D]" onclick="openTreeModal(${tree.id})">${tree.name}</h2>
+             <h2 class="card-title text-[#15803D] cursor-pointer hover:text-green-500" onclick="openTreeModal(${tree.id})">${tree.name}</h2>
              <p class="line-clamp-2">${tree.description}</p>
              <div class="badge badge-outline badge-success">${tree.category}</div>  
              <div class="card-actions  justify-between items-center">
@@ -108,9 +116,22 @@ function displayTrees (trees) {
 }
 
 
-function openTreeModal (treeId) {
-    console.log(treeId)
+async function openTreeModal (treeId) {
+    // console.log(treeId)
+    const res = await fetch(`https://openapi.programming-hero.com/api/plant/${treeId}`);
+    const data = await res.json();
+    const plantsDtails = data.plants
     treeDetailsModal.showModal();
+    // console.log("data", plantsDtails);
+    console.log(modalTitle)
+    
+    modalTitle.innerText = plantsDtails.name;
+    modalCategory.innerText = plantsDtails.category;
+    modalImage.src = plantsDtails.image;
+    modalDescription.textContent = plantsDtails.description;
+    modalPrice.textContent = plantsDtails.price;
+
+
 }
 loadTree();
 
