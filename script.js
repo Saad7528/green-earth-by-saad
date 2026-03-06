@@ -169,14 +169,19 @@ function updateCart() {
                                     <h2>${item.name}</h2>
                                     <p>${item.price} x ${item.quantity}}</p>
                                 </div>
-                                <button class="btn btn-ghost" onclick="removeFromCart(${item.id})">X</button>
+                                <button class="btn btn-ghost" onclick="removeFromCart(${item.id})" >X</button>
                             </div>
                             <p class="text-right font-semibold text-xl">${item.price * item.quantity} TK</p>`;
     cartContainer.appendChild(cartItem)
     })
 }
 
-function removeFromCart(id) {
+function removeFromCart(treeId) {
+    console.log("amivat khai", treeId)
+    const updatedCartArray = cart.filter(item => item.id != treeId);
+    cart = updatedCartArray;
+    updateCart()
+
 
 }
 
